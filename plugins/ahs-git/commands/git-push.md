@@ -22,4 +22,4 @@ allowed-tools: Bash(git add:_), Bash(git status:_), Bash(git diff:_), Bash(git c
 4. 执行 `git commit -m "<参考commit-message.md规范>"`
 5. 告诉我最终的 commit message 是什么
 6. 执行 `git push`
-7. 输出push结果
+7. 输出push结果，同时要隐藏完整的push地址，只打印项目名称就行
