@@ -8,7 +8,7 @@ allowed-tools: Bash(git add:_), Bash(git status:_), Bash(git diff:_), Bash(git c
 - 当前分支: !`git branch --show-current`
 - 当前状态: !`git status`
 - 改动内容: !`git diff HEAD`
-- 最近提交: !`git log --oneline -5`
+- 最近提交: !`git log --oneline -6`
 
 ## 你的任务
 
