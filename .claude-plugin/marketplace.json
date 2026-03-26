@@ -20,7 +20,7 @@
     {
       "name": "ahs-git-tools",
       "description": "自动 git commit、git push、git merge",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "source": "./plugins/ahs-git"
     }
   ]
