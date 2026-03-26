@@ -12,14 +12,14 @@ allowed-tools: Bash(git add:_), Bash(git status:_), Bash(git diff:_), Bash(git c
 
 ## 你的任务
 
-将分支 `$ARGUMENTS` 合并到当前分支：
+任务执行步骤：
 
 1. 分析改动的核心意图
 2. 生成符合 Conventional Commits 规范的 commit message
    - 格式：`type(scope): description`
    - type 可选：feat / fix / refactor / docs / style / test / chore
 3. 执行 `git add .`
-4. 执行 `git commit -m "<$ARGUMENTS或者生成的message>"`
+4. 执行 `git commit -m "<参考commit-message.md规范>"`
 5. 告诉我最终的 commit message 是什么
 6. 执行 `git push`
 7. 输出push结果
