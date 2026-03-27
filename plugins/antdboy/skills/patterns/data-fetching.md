@@ -47,7 +47,15 @@ export function useProductOptions(params: { categoryId?: number; brandId?: numbe
 - 除了涉及到表格数据的请求，其他请求都应该使用useRequest触发
 - 如果默认发起请求的话，就是不配置manual为true，如果是需要手动主动触发的话，需要配置manual为true
 - 如果useRequest获取的数据需要用在Modal里面，则默认不发起请求，当弹窗打开的时候再发起请求，避免组件加载默认过多的接口请求
-- 使用useRequest的场景是查询、创建、编辑等操作时应该加一下防抖，useRequest配置debounceWait为300
+- 在查询、创建、编辑等操作场景中，建议为 useRequest 配置防抖：
+
+```typescript
+  tsdebounceWait: 300,
+  debounceLeading: true
+```
+
+对于 Modal 确认按钮等自带 loading 状态的场景，按钮本身已能防止重复提交，无需额外配置 debounceWait。
+
 - 具体的使用规范代码如下
 
 ```typescript
