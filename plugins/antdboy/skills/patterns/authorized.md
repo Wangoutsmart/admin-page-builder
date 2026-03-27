@@ -1,5 +1,6 @@
 ### 权限控制
-
+- 需求文档或者说明文档里面没有说明要限制权限的时候，忽略以下内容
+- 当文档或者说明明确提示功能有权限且指定了权限名称，执行以下规范的操作
 明确说明需要权限的按钮或者局部页面，用 `<Authorized permission="...">` 包裹，且把按钮的显示隐藏条件、状态描述、最终作用的目标API地址一起在`Authorized`配置,
 例如`<Authorized permission="权限名字" visible={status === 1} status={['状态是待发货']} apis={['POST /opt-test/shipping']}><Button>发货</Button></Authorized> `。
 如果项目目录`src/components`下面没有authorized相关组件的话，参考下面模板代码生成这个组件

@@ -2,11 +2,11 @@
 
 所有请求必须经过 `utils/axios.ts`，组件内禁止直接调用原生 axios。
 
-组件内数据获取统一用 `useRequest`，错误展示在 `onError` 回调处理，禁止组件内 try/catch 后手动 `message.error`。
+组件内数据获取统一用 `useRequest`，因为`utils/axios.ts`会统一处理error，所以禁止useRequest的执行函数内 try/catch 后手动 `message.error`。
 
-非必要情况，不需要重新写一个service.ts里面放各种api接口
+非必要情况，不需要重新写一个service.ts或apis.ts里面放各种api接口
 
-枚举类的请求，或者你认为可以通用的请求，请封装成hook在`src/hooks`下面管理，hooks规范如下：
+枚举类的请求，或者你认为可以全局通用的请求，请封装成hook在`src/hooks`下面管理，hooks规范如下：
 
 ```typescript
 import { useRequest } from "ahooks"
@@ -46,6 +46,7 @@ export function useProductOptions(params: { categoryId?: number; brandId?: numbe
 
 - 除了涉及到表格数据的请求，其他请求都应该使用useRequest触发
 - 如果默认发起请求的话，就是不配置manual为true，如果是需要手动主动触发的话，需要配置manual为true
+- 如果useRequest获取的数据需要用在Modal里面，则默认不发起请求，当弹窗打开的时候再发起请求，避免组件加载默认过多的接口请求
 - 使用useRequest的场景是查询、创建、编辑等操作时应该加一下防抖，useRequest配置debounceWait为300
 - 具体的使用规范代码如下
 

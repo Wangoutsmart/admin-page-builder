@@ -12,7 +12,7 @@
 
 ```
 [module]/
-├── index.tsx              # 页面容器：持有 useAntdTable、所有 ref、Authorized 权限控制
+├── index.tsx
 └── components/
     ├── search/index.tsx   # 搜索栏（纯展示，无请求，接收 form + search props）
     ├── [form]/index.tsx   # 新增/编辑/查看 Modal
@@ -23,6 +23,7 @@
 ### Modal 控制：`forwardRef` + `useImperativeHandle`
 
 弹窗通过 `ref.show()` 触发，**不通过父组件 state 控制开关**，避免每个弹窗维护独立 boolean。
+如果useImperativeHandle暴露出来的方法实现超过五行，则把逻辑抽离出来单独实现
 
 ```tsx
 // 定义 Ref 类型
