@@ -1,108 +1,39 @@
 # 数据请求约定
 
-所有请求必须经过 `utils/axios.ts`，组件内禁止直接调用原生 axios。
+- 所有请求统一通过 `utils/axios.ts` 暴露的 `axios` 实例发起，禁止在组件内直接使用原生 `axios`。
+- 组件内的数据请求只允许使用 ahooks 的 `useRequest` 或 `useAntdTable`。
+- 请求层已统一处理错误时，禁止在请求函数里再手动 `try/catch` 并调用 `message.error`，避免重复提示。
+- 非必要不要新建 `service.ts`、`apis.ts`；请求逻辑优先就近放在页面、弹窗或 hook 中。
+- 枚举类请求、下拉选项请求、跨页面复用的通用请求，统一封装为 `src/hooks` 下的 `useXxx` hook。
 
-组件内数据获取统一用 `useRequest`，因为`utils/axios.ts`会统一处理error，所以禁止useRequest的执行函数内 try/catch 后手动 `message.error`。
+## loading 规范
 
-非必要情况，不需要重新写一个service.ts或apis.ts里面放各种api接口
+- 列表查询、新增、编辑、删除、启停、提交等用户主动触发的请求，必须正确使用 loading。
+- loading 直接使用 `useRequest` 和 `useAntdTable` 返回的状态，不要再额外用 `useState` 维护一份同义状态。
 
-枚举类的请求，或者你认为可以全局通用的请求，请封装成hook在`src/hooks`下面管理，hooks规范如下：
+## useRequest 规范
 
-```typescript
-import { useRequest } from "ahooks"
-import { axios } from "@/utils"
-
-export interface ProductOption {
-  id: number
-  name: string
-}
-
-export function useProductOptions(params: { categoryId?: number; brandId?: number; keyword?: string }) {
-  const { categoryId, brandId, keyword } = params
-
-  const { data, loading } = useRequest(
-    async () => {
-      const resp = await axios.get<ProductOption[]>("/opt-overseas-admin-service/selection/search/product", params)
-      return resp.data
-    },
-    {
-      ready: !!categoryId,
-      refreshDeps: [categoryId, brandId, keyword]
-    }
-  )
-
-  return {
-    productOptions: data,
-    loading
-  }
-}
-```
-
-## loading规范
-
-- 如果请求的发起涉及到用户主动触发，场景是列表查询、创建、编辑、删除等操作场景要主动使用loading，loading要使用useRequest和useAntdTable的默认loading，不需要再重复使用useState保存状态。
-
-## useRequest 使用规范
-
-- 除了涉及到表格数据的请求，其他请求都应该使用useRequest触发
-- 如果默认发起请求的话，就是不配置manual为true，如果是需要手动主动触发的话，需要配置manual为true
-- 如果useRequest获取的数据需要用在Modal里面，则默认不发起请求，当弹窗打开的时候再发起请求，避免组件加载默认过多的接口请求
-- 在查询、创建、编辑等操作场景中，建议为 useRequest 配置防抖：
+- 除表格列表请求外，其他异步请求统一使用 `useRequest`。
+- 默认自动触发的请求，不配置 `manual: true`；只有需要手动触发时才配置。
+- 只在 `Modal` 内使用的数据，默认不要在组件初始化时自动请求，应在弹窗打开后再触发。
+- 查询、新增、编辑等高频操作，优先配置：
 
 ```typescript
-  tsdebounceWait: 300,
-  debounceLeading: true
+debounceWait: 300,
+debounceLeading: true,
 ```
 
-对于 Modal 确认按钮等自带 loading 状态的场景，按钮本身已能防止重复提交，无需额外配置 debounceWait。
+- 如果按钮自身已有明确 loading 且能防止重复提交，可以不额外配置防抖。
 
-- 具体的使用规范代码如下
+## useAntdTable 规范
 
-```typescript
-const { data: enumData, loading } = useRequest(
-  async () => {
-    const { data } = await axios.get("url", { params })
-    return data
-  },
-  {
-    manual: true // 默认自动触发的话就不设置manual
-  }
-)
-```
+- useAntdTable 只用于“查询条件 + 分页列表 + Table 展示”场景。
+- 默认分页大小统一为 20，配置 defaultPageSize: 20。
+- - 请求结果统一返回 { list, total }。
+    外部关键参数驱动的列表刷新，统一使用 refreshDeps。
 
-## useAntdTable 使用规范
+## 补充约束
 
-> useAntdTable 用于承载查询逻辑，查询结果统一使用 Ant Design 的 Table 组件展示
-
-- 默认分页20条一页，配置项 defaultPageSize: 20
-- 具体使用规范代码如下
-
-```typescript
-const { tableProps } = useAntdTable(
-    async ({ current, pageSize }) => {
-      if (!ruleId) {
-        return {
-          list: [],
-          total: 0
-        }
-      }
-
-      const resp = await axios.post<Paginated<Log[]>>(
-        '/opt-work-task/backend/task-auto-assign-rule/log-list',
-        {
-          id: ruleId,
-          pageIndex: current - 1,
-          pageSize
-        }
-      )
-
-      return { list: resp.data || [], total: resp.totalCount }
-    },
-    {
-      defaultPageSize: 20,
-      refreshDeps: [ruleId]
-    }
-  )
-
-<Table {...tableProps} bordered columns={columns} />
-```
+- 不要在同一页面里混用多套请求方案。
+- 不要把同一个接口同时写在页面和通用 hook 里。
+- 不要重复处理请求层已经统一兜底的错误、loading 和参数逻辑。

@@ -3,10 +3,6 @@
   description: 使用 Ant Design 5 + TypeScript + ahooks 开发 React 中后台管理系统时，遵循此规范进行页面组织、数据请求和权限控制
 ---
 
-# React 中后台管理系统 AI Agent 协作指南
-
-你是一位精通 TypeScript、React 与中后台工程化的资深前端工程师。协助我以高质量、可维护的方式完成本项目开发。
-
 ## 1. 目录结构
 
 ```
