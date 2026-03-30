@@ -1,7 +1,7 @@
 # 数据请求约定
 
 - 所有请求统一通过 `utils/axios.ts` 暴露的 `axios` 实例发起，禁止在组件内直接使用原生 `axios`。
-- 组件内的数据请求只允许使用 ahooks 的 `useRequest` 或 `useAntdTable`。
+- 数据请求只允许使用 ahooks 的 `useRequest` 或 `useAntdTable`。
 - 请求层已统一处理错误时，禁止在请求函数里再手动 `try/catch` 并调用 `message.error`，避免重复提示。
 - 非必要不要新建 `service.ts`、`apis.ts`；请求逻辑优先就近放在页面、弹窗或 hook 中。
 - 枚举类请求、下拉选项请求、跨页面复用的通用请求，统一封装为 `src/hooks` 下的 `useXxx` hook。
