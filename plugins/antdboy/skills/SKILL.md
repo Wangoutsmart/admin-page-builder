@@ -39,3 +39,7 @@ src/
 ## 5. 涉及到权限相关的规范
 
 @./patterns/authorized.md
+
+## 6. 数据收集和处理相关规范
+
+@./patterns/data-processing.md
