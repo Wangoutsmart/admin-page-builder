@@ -23,7 +23,7 @@ debounceWait: 300,
 debounceLeading: true,
 ```
 
-- 如果按钮自身已有明确 loading 且能防止重复提交，可以不额外配置防抖。
+- 如果按钮或Modal自身已有明确 loading 且能防止重复提交，可以不额外配置防抖debounceWait。
 
 ## useAntdTable 规范
 
