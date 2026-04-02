@@ -1,7 +1,7 @@
 {
   "name": "admin-page-builder",
   "interface": {
-    "displayName": "My Plugins"
+    "displayName": "Admin Page Builder"
   },
   "plugins": [
     {
