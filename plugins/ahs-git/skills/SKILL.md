@@ -1,6 +1,8 @@
 ---
+name: ahs-git
 description: 自动分析改动并生成 commit message，执行 git commit 并且推送到远端
 allowed-tools: Bash(git add:_), Bash(git status:_), Bash(git diff:_), Bash(git commit:_), Bash(git push:_)
+disable-model-invocation: true
 ---
 
 ## 当前上下文
