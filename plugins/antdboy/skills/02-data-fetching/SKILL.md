@@ -1,6 +1,6 @@
 ---
 name: data-fetching
-description: React + Ant Design + ahooks 中后台项目的数据请求规范。用于开发或修改中后台页面时涉及接口请求的场景，包括列表查询、分页表格、搜索表单、弹窗数据加载、详情获取、新增编辑提交、删除启停、行内操作、远端模糊搜索等。默认要求普通请求使用 `useRequest`，表单表格查询使用 `useAntdTable`，所有请求统一通过 `utils/axios.ts` 暴露的 `axios` 实例发起，并统一约束 loading、刷新联动、防抖和防频繁请求策略。不用于权限控制、页面组织模式或表单校验规则。
+description: React + Ant Design + ahooks 中后台项目的数据请求规范。用于开发或修改中后台页面时涉及接口请求的场景，包括列表查询、分页表格、搜索表单、弹窗数据加载、详情获取、新增编辑提交、删除启停、行内操作、远端模糊搜索等。默认要求普通请求使用 `useRequest`，表单表格查询使用 `useAntdTable`，所有请求统一通过 `utils/axios.ts` 暴露的 `axios` 实例发起，并统一约束 loading、刷新联动、防抖和防频繁请求策略。不用于权限控制、页面组织模式或表单校验规则。swagger接口文档请求约束。
 user-invocable: false
 ---
 
@@ -13,6 +13,10 @@ user-invocable: false
 - 请求层已统一处理错误时，禁止在 `useRequest` / `useAntdTable` 的执行函数里手动 `try/catch` 并调用 `message.error`，避免重复提示。
 - 非必要不要新建 `service.ts`、`apis.ts`；请求逻辑优先就近放在页面、弹窗或 hook 中。
 - 枚举类请求、下拉选项请求、跨页面复用的通用请求，统一封装为 `src/hooks` 下的 `useXxx` hook。
+
+## swagger请求规范
+
+- 当明确需要从指定的swagger地址获取接口定义的时候，一定要通过各种方法获取到接口的真实定义，不要自己根据语义或者图片自己定义字段名称
 
 ## loading 规范
 
