@@ -4,7 +4,8 @@
       "Bash(git push:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "WebFetch(domain:uat-swagger-ui.aihuishou.com)"
+      "WebFetch(domain:uat-swagger-ui.aihuishou.com)",
+      "Bash(wc -l /Volumes/D/ai/admin-page-builder/plugins/antdboy/skills/09-page-builder-agent/steps/*.md)"
     ]
   }
 }
