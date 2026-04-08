@@ -6,11 +6,6 @@ user-invocable: false
 
 # TypeScript 类型组织规范
 
-## 说明
-
-使用这份规范统一处理中后台前端项目中的 TypeScript 类型分层和放置方式。
-默认让类型定义尽量靠近其实际使用位置，减少全局类型文件膨胀和接口类型、表单类型混用的问题。
-
 ### TypeScript 类型定义规范
 
 - 类型定义按作用域就近放置，不要默认全部抽到全局公共文件。
@@ -25,14 +20,6 @@ user-invocable: false
 - 表单 `values` 类型不要直接复用接口入参类型；当表单字段结构和接口字段结构不一致时，分别定义类型。
 - 不要把页面私有类型、表单类型、接口契约类型全部堆到一个公共文件里。
 - 不要因为“方便统一管理”就把所有类型都塞进 `apis.ts`；`apis.ts` 或请求 hook 文件只承载与接口契约强相关的类型。
-
-### 命名规范
-
-- 请求参数类型命名为 `XxxQueryParams`、`XxxCreateParams`、`XxxUpdateParams`
-- 响应数据类型命名为 `XxxItem`、`XxxDetail`、`XxxResponse`
-- 表单类型命名为 `XxxFormValues`、`XxxSearchFormValues`
-- 组件属性类型命名为 `XxxProps`
-- 不要使用 `Data`、`Info`、`Item` 这类过于泛化且没有业务含义的命名
 
 ### interface 和 type 使用规范
 
@@ -53,8 +40,3 @@ user-invocable: false
 - 善用 `Pick`、`Omit`、`Partial`、`Record` 等工具类型复用已有结构，但不要为了复用把类型写得难以阅读
 - 只有当类型关系明确且能提升可维护性时，才使用复杂工具类型，不要机械套用
 
-### 默认约束
-
-- 类型定义应优先表达业务含义，而不是只描述数据形状
-- 类型名称应清晰反映所属业务和用途
-- 如果一个类型需要长篇注释才能理解，优先先优化命名和拆分结构，而不是依赖注释兜底

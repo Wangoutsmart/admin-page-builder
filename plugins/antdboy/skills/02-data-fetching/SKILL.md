@@ -11,7 +11,7 @@ user-invocable: false
 - 普通查询、详情获取、创建、编辑、删除、启停、导出、行内操作等非表格列表请求，统一使用 `useRequest`。
 - 涉及“查询条件 + 分页列表 + Table 展示”的场景，统一使用 `useAntdTable`。
 - 请求层已统一处理错误时，禁止在 `useRequest` / `useAntdTable` 的执行函数里手动 `try/catch` 并调用 `message.error`，避免重复提示。
-- 非必要不要新建 `service.ts`、`apis.ts`；请求逻辑优先就近放在页面、弹窗或 hook 中。
+- 每个业务模块的接口请求函数统一放在模块根目录的 `apis/index.ts` 中，以 `apis` 对象导出；具体组织方式见 `01-api-organization` 规范。
 - 枚举类请求、下拉选项请求、跨页面复用的通用请求，统一封装为 `src/hooks` 下的 `useXxx` hook。
 
 ## swagger请求规范
@@ -25,6 +25,7 @@ user-invocable: false
 - 按钮主动触发的请求，尽量把 loading 直接绑定在当前按钮上，不要无故扩大到整页。
 - 行内操作的 loading 只作用在当前操作项，不要因为一条记录操作把整个列表全部锁住。
 - 如果按钮、Modal 确认按钮或组件本身已经有明确 loading 且能阻止重复提交，不要再额外叠加一套重复的 loading 状态。
+- 列表查询按钮绑定 `useAntdTable` 返回的 `loading`，表单提交按钮绑定 `useRequest` 返回的 `loading`，直接作为 `<Button loading={loading}>` 的 prop；Ant Design Button 在 loading 期间会自动禁用点击，无需额外用 `disabled` 或 `useState` 实现防重复提交。
 
 ## useRequest 规范
 
