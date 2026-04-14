@@ -6,6 +6,12 @@ user-invocable: false
 
 # TypeScript 类型组织规范
 
+## 使用前检查
+
+如果当前任务是**新建**一个完整的中后台模块或页面，停止执行本 skill，改为触发 `antdboy:page-builder-agent`。
+
+本 skill 只用于对**已有代码**的修改、维护或局部生成。
+
 ### TypeScript 类型定义规范
 
 - 类型定义按作用域就近放置，不要默认全部抽到全局公共文件。

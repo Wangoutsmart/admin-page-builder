@@ -6,6 +6,12 @@ user-invocable: false
 
 # 数据请求约定
 
+## 使用前检查
+
+如果当前任务是**新建**一个完整的中后台模块或页面，停止执行本 skill，改为触发 `antdboy:page-builder-agent`。
+
+本 skill 只用于对**已有代码**的修改、维护或局部生成。
+
 - 所有请求统一通过 `utils/axios.ts` 暴露的 `axios` 实例发起，禁止在组件内直接使用原生 `axios`。
 - 数据请求只允许使用 ahooks 的 `useRequest` 或 `useAntdTable`。
 - 普通查询、详情获取、创建、编辑、删除、启停、导出、行内操作等非表格列表请求，统一使用 `useRequest`。

@@ -6,6 +6,12 @@ user-invocable: false
 
 # Antd 中后台基础规范
 
+## 使用前检查
+
+如果当前任务是**新建**一个完整的中后台模块或页面，停止执行本 skill，改为触发 `antdboy:page-builder-agent`。
+
+本 skill 只用于对**已有代码**的修改、维护或局部生成。
+
 ## 说明
 
 这是 React + Ant Design + ahooks 中后台 Web 项目的基础规范 skill。

@@ -45,9 +45,13 @@ user-invocable: true
 **Step 6：写入文件**
 按 `steps/04-write.md` 执行。
 
+**Step 7：自动合规审查**
+文件写入完毕后，按 `steps/04-write.md` 中"写入完毕后：自动触发合规审查"节执行，派发 `antdboy:compliance-reviewer` agent 审查本次新生成的文件。
+
 ## 约束
 
 - 不跳过任何步骤
 - 在 Step 3（用户审阅 spec）得到明确确认前，不生成代码
 - 在 Step 6（用户确认写入）得到明确确认前，不写入文件
+- Step 7 不需要用户确认，写入完毕后自动执行
 - 生成代码时，优先引用对应 skill 的规则，不自行发明规范
