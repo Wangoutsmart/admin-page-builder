@@ -24,7 +24,8 @@ user-invocable: false
 ```
 src/pages/user-management/
 ├── apis/
-│   └── index.ts      # 请求函数定义 + 入参/响应类型
+│   └── index.ts      # 请求函数定义
+│   └── types.ts      # 入参/响应类型
 ├── index.tsx         # 页面入口
 └── components/
 ```

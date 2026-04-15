@@ -28,6 +28,7 @@ user-invocable: true
 - `antdboy:06-code-comment-standards`：注释规范
 - `antdboy:07-ts-type-organization`：TypeScript 类型规范
 - `antdboy:08-naming-conventions`：命名规范
+- `antdboy:10-import-order`：import 排列规范
 
 ## 执行流程
 
@@ -55,3 +56,8 @@ user-invocable: true
 - 在 Step 6（用户确认写入）得到明确确认前，不写入文件
 - Step 7 不需要用户确认，写入完毕后自动执行
 - 生成代码时，优先引用对应 skill 的规则，不自行发明规范
+
+## 编码规则
+
+- **规范空白处理**：遇到 antdboy 规范未覆盖的场景时，禁止参考项目中已有页面/组件的代码风格，应独立判断并采用你认为最优的方案
+- **Table 前端分页**：使用 antd Table 展示数据时，若后端接口无分页，不得手动实现分页逻辑；保持 Table 默认 `pagination` 行为，由组件自行处理前端分页展示

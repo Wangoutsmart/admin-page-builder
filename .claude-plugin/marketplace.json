@@ -10,7 +10,7 @@
     {
       "name": "antdboy",
       "description": "常用开发antd+react+hooks的后台管理页面",
-      "version": "0.0.15",
+      "version": "0.0.16",
       "source": "./plugins/antdboy",
       "author": {
         "name": "wzs",
