@@ -8,7 +8,7 @@ user-invocable: false
 
 ## 使用前检查
 
-如果当前任务是**新建**一个完整的中后台模块或页面，停止执行本 skill，改为触发 `antdboy:page-builder-agent`。
+如果当前任务是**新建**一个完整的中后台模块或页面，停止执行本 skill，改为触发 `antdboy:page-scaffold`。
 
 本 skill 只用于对**已有代码**的修改、维护或局部生成。
 
@@ -34,7 +34,7 @@ src/pages/user-management/
 - 导出一个具名 `apis` 对象，**不要导出散装函数，不要使用 class**。
 - 对象的每个方法对应一个接口，直接 `return` axios 实例的调用结果。
 - **所有 axios 调用必须使用 `utils/axios.ts` 暴露的实例**，禁止直接 `import axios from 'axios'`。
-- 接口入参类型（`XxxQueryParams`、`XxxCreateParams`、`XxxUpdateParams`）和响应类型（`XxxItem`、`XxxDetail`、`XxxResponse`）在同一文件内定义，放在 `apis` 对象上方。
+- 接口入参类型（`XxxQueryParams`、`XxxCreateParams`、`XxxUpdateParams`）和响应类型（`XxxItem`、`XxxDetail`、`XxxResponse`）在同一文件内定义，放在 `apis` 对象上方。注意：apis里面的类型定义只能放置接口相关的出入参数据的类型。
 - **字段名以 Swagger/OpenAPI 实际定义为准**，不自行推断或根据 UI 语义命名。
 
 ### 推荐写法

@@ -8,7 +8,7 @@ user-invocable: false
 
 ## 使用前检查
 
-如果当前任务是**新建**一个完整的中后台模块或页面，停止执行本 skill，改为触发 `antdboy:page-builder-agent`。
+如果当前任务是**新建**一个完整的中后台模块或页面，停止执行本 skill，改为触发 `antdboy:page-scaffold`。
 
 本 skill 只用于对**已有代码**的修改、维护或局部生成。
 
