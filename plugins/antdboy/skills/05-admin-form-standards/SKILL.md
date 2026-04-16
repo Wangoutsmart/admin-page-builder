@@ -58,9 +58,26 @@ user-invocable: false
 
 ## 输入处理规范
 
-- 当表单中使用 Input、Input.TextArea 等普通文本输入组件时，默认在表单层对值执行 trim 处理；若同一模块内多个字段存在相同需求，必须抽取为统一的公共处理逻辑，不得在各字段中重复编写去空格代码。
+- 当表单中使用 Input、Input.TextArea 等普通文本输入组件时，默认在 `Form.Item` 上通过 `normalize` prop 对值执行 trim 处理；若同一模块内多个字段存在相同需求，必须抽取为统一的公共处理逻辑，不得在各字段中重复编写去空格代码。
 - 只有在业务明确要求保留前后空格时，才跳过这条规则，例如密码、密钥、富文本、代码片段或其他格式敏感内容。
 - 不要为了处理空格问题，在提交函数里到处临时`trim`或手动过滤undefined、null等；优先在表单层统一处理。
+
+标准写法：
+
+```tsx
+// 单字段：在 Form.Item 上声明 normalize
+<Form.Item name="name" normalize={(value) => value?.trim()}>
+  <Input allowClear placeholder="请输入" />
+</Form.Item>
+// 多字段复用：抽取公共 normalize 函数，不要在每个字段重复内联
+const trimNormalize = (value: string) => value?.trim();
+<Form.Item name="name" normalize={trimNormalize}>
+  <Input allowClear placeholder="请输入" />
+</Form.Item>
+<Form.Item name="description" normalize={trimNormalize}>
+  <Input.TextArea allowClear placeholder="请输入" />
+</Form.Item>
+```
 
 ## 新增编辑查看复用规范
 
